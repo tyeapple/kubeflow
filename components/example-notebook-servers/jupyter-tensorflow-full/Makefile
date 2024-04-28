@@ -15,12 +15,14 @@
 GIT_COMMIT     := $(shell git rev-parse HEAD)
 GIT_TREE_STATE := $(shell test -n "`git status --porcelain`" && echo "-dirty" || echo "")
 
-REGISTRY ?= docker.io/kubeflownotebookswg
+# REGISTRY ?= docker.io/kubeflownotebookswg
+REGISTRY ?= docker.nju.edu.cn/kubeflownotebookswg
 TAG      ?= sha-$(GIT_COMMIT)$(GIT_TREE_STATE)
 
 IMAGE_NAME := jupyter-tensorflow-full
 
-BASE_IMAGE         := $(REGISTRY)/jupyter-tensorflow:$(TAG)
+# BASE_IMAGE         := $(REGISTRY)/jupyter-tensorflow:$(TAG)
+BASE_IMAGE         := $(REGISTRY)/jupyter-tensorflow:v1.8.0
 BASE_IMAGE_FOLDERS := jupyter-tensorflow
 
 # we use a separate registry-type cache to keep the main registry clean
