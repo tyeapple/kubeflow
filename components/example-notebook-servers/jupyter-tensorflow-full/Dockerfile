@@ -26,3 +26,15 @@ RUN mamba install -y -q \
 COPY --chown=${NB_USER}:users requirements.txt /tmp/requirements.txt
 RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir -i https://pypi.mirrors.ustc.edu.cn/simple/ \
  && rm -f /tmp/requirements.txt
+
+# additional tools for custom image
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get -yq update \
+ && apt-get -yq install --no-install-recommends \
+    netcat \
+    sudo \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+# 为 root 用户设置密码，这里的密码是 'your_password'，请替换为你想要设置的密码
+RUN echo 'root:kfroot' | chpasswd
