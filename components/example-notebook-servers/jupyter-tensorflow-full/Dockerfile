@@ -28,6 +28,7 @@ RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir -i ht
  && rm -f /tmp/requirements.txt
 
 # additional tools for custom image
+USER root
 RUN export DEBIAN_FRONTEND=noninteractive \
  && apt-get -yq update \
  && apt-get -yq install --no-install-recommends \
@@ -36,5 +37,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-# 为 root 用户设置密码，这里的密码是 'your_password'，请替换为你想要设置的密码
 RUN echo 'root:kfroot' | chpasswd
+# end
+USER $NB_UID
