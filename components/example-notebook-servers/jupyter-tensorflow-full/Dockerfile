@@ -24,5 +24,5 @@ RUN mamba install -y -q \
 
 # install - requirements.txt
 COPY --chown=${NB_USER}:users requirements.txt /tmp/requirements.txt
-RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir -i http://mirrors.aliyun.com/pypi/simple/\
+RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir -i https://pypi.mirrors.ustc.edu.cn/simple/ \
  && rm -f /tmp/requirements.txt
